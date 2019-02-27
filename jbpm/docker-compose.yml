@@ -1,0 +1,36 @@
+version: '3.1'
+
+services:
+  bpm-server:
+    # image: jboss/jbpm-server-full:latest
+    build: ./
+    environment:
+      JBPM_DB_DRIVER: postgres
+      JBPM_DB_HOST: db
+      JBPM_DB_PORT: 5432
+      JBPM_DB_NAME: jbpm
+      JBPM_DB_USER: postgres
+      JBPM_DB_PASSWORD: sleader
+    ports:
+      - 8080:8080
+      - 8001:8001
+    volumes:
+      - jbpm-git:/opt/jboss/wildfly/bin/.niogit:Z
+    networks:
+      - default
+      - global
+
+volumes:
+  jbpm-git:
+
+networks:
+  global:
+    external: true
+# http://localhost:8080/business-central
+# wbadmin     wbadmin     admin,analyst,user,process-admin,kie-server
+# krisv       krisv       admin,analyst,user,process-admin,kie-server
+# john        john        analyst,Accounting,PM,kie-server
+# sales-rep   sales-rep   analyst,sales,kie-server
+# katy        katy        analyst,HR,kie-server
+# jack        jack        analyst,IT,kie-server
+# docker run -p 8080:8080 -p 8001:8001 -v ./git-repo:/opt/jboss/wildfly/bin/.niogit:Z -d --name jbpm-server-full jboss/jbpm-server-full:latest

@@ -1,0 +1,36 @@
+version: '3.1'
+
+services:
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: sleader
+      PGDATA: /tmp
+    ports:
+      - 5432:5432
+    volumes:
+      - db-data:/tmp
+    networks:
+      - default
+      - global
+
+  adminer:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "admin@root.ip"
+      PGADMIN_DEFAULT_PASSWORD: "sleader"
+    ports:
+      - 5433:80
+    volumes:
+      - adminer-data:/var/lib/pgadmin
+    networks:
+      - default
+
+volumes:
+  db-data:
+  adminer-data:
+
+networks:
+  global:
+    external: true

@@ -1,0 +1,2 @@
+FROM diouxx/apache-proxy
+COPY ./proxy.conf /opt/proxy-conf/proxy.conf
