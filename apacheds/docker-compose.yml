@@ -1,0 +1,7 @@
+version: '3.1'
+
+services:
+  ldap:
+    image: openmicroscopy/apacheds
+    ports:
+      - 10389:10389
