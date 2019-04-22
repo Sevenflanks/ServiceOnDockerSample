@@ -1,6 +1,7 @@
 /target/
 /log/
 !.mvn/wrapper/maven-wrapper.jar
+.war
 
 ### STS ###
 .apt_generated
@@ -28,3 +29,4 @@
 _sample_from_chinalife_1/.gradle/
 _sample_from_chinalife_2/.gradle/
 _sample_from_chinalife_1/build/
+*.war
