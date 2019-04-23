@@ -10,5 +10,7 @@ services:
       ES_HOST: '192.168.1.71'
       LS_JAVA_OPTS: '-Xmx512m -Xms512m'
       DEVOPS_OPTS: ''
+      DEBUG: "true"
+      LOG_LEVEL: "info"
     ports:
-      - 4561:4561
+      - 4561:4560
