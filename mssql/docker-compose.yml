@@ -1,0 +1,24 @@
+version: '3.1'
+
+services:
+  db:
+    image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu
+    environment:
+      SA_PASSWORD: Pass@123456789
+      ACCEPT_EULA: Y
+      MSSQL_PID: Express
+      TZ: Asia/Taipei
+    ports:
+      - 1433:1433
+    volumes:
+      - db-data:/var/opt/mssql
+    networks:
+      - default
+      - global
+
+volumes:
+  db-data:
+
+networks:
+  global:
+    external: true

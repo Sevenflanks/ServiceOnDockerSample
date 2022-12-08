@@ -1,0 +1,16 @@
+version: '3.1'
+
+services:
+  openldap:
+    image: bitnami/openldap:2.5.7
+    environment:
+      BITNAMI_DEBUG: "true"
+      LDAP_ROOT: "dc=example,dc=com"
+      LDAP_ADMIN_USERNAME: "admin"
+      LDAP_ADMIN_PASSWORD: "secret"
+      LDAP_ALLOW_ANON_BINDING: "no"
+    volumes:
+      - .\data:/bitnami/openldap
+    ports:
+      - "10389:1389"
+      - "10636:1636"

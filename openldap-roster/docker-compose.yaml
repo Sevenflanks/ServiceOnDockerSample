@@ -1,0 +1,50 @@
+version: "2.0"
+services:
+  # 轉移資料
+  migrate:
+    image: "osixia/openldap:1.2.4"
+    environment:
+      LDAP_LOG_LEVEL: "256"
+      LDAP_ORGANISATION: "SoftLeader"
+      LDAP_DOMAIN: "example.com"
+      LDAP_BASE_DN: "dc=example,dc=com"
+      LDAP_ADMIN_PASSWORD: "secret"
+      LDAP_CONFIG_PASSWORD: "config"
+      LDAP_READONLY_USER: "false"
+      LDAP_RFC2307BIS_SCHEMA: "false"
+      LDAP_BACKEND: "mdb"
+      LDAP_TLS: "false"
+      LDAP_REPLICATION: "false"
+      KEEP_EXISTING_CONFIG: "true"
+    volumes:
+      - ./data:/var/lib/ldap
+      - ./config:/etc/ldap/slapd.d
+      - ./exchange:/tmp/exchange
+    ports:
+      - "20389:389"
+      - "20636:636"
+    restart: on-failure
+  # LDAP Server
+  openldap:
+    image: "osixia/openldap:1.2.4"
+    environment:
+      LDAP_LOG_LEVEL: "256"
+      LDAP_ORGANISATION: "SoftLeader"
+      LDAP_DOMAIN: "example.com"
+      LDAP_BASE_DN: "dc=example,dc=com"
+      LDAP_ADMIN_PASSWORD: "secret"
+      LDAP_CONFIG_PASSWORD: "config"
+      LDAP_READONLY_USER: "false"
+      LDAP_RFC2307BIS_SCHEMA: "false"
+      LDAP_BACKEND: "mdb"
+      LDAP_TLS: "false"
+      LDAP_REPLICATION: "false"
+      KEEP_EXISTING_CONFIG: "true"
+    volumes:
+      - ./data:/var/lib/ldap
+      - ./config:/etc/ldap/slapd.d
+      - ./exchange:/tmp/exchange
+    ports:
+      - "10389:389"
+      - "10636:636"
+    restart: on-failure

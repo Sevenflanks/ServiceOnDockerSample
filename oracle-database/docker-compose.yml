@@ -1,0 +1,24 @@
+version: '3.1'
+
+services:
+  db:
+    image: check-image # get image name from https://hub.docker.com/_/oracle-database-enterprise-edition
+    environment:
+      DB_SID: ORCLCDB
+    volumes:
+      - oracle-db-data:/ORCL
+    ports:
+      - 1521:1521
+    networks:
+      - default
+      - global
+
+volumes:
+  oracle-db-data:
+
+networks:
+  global:
+    external: true
+
+# store/oracle/database-enterprise:12.2.0.1-slim
+# defautl username/password: sys/Oradoc_db1

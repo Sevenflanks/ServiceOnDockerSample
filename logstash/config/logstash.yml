@@ -1,0 +1,8 @@
+config.debug: ${DEBUG:false}
+http.host: 0.0.0.0
+log.level: info
+path.config: /usr/share/logstash/pipeline
+xpack:
+  monitoring:
+    elasticsearch.url: ${ES_SCHEMA:http}://${ES_HOST:elasticsearch}:${ES_PORT:9200}
+    enabled: true

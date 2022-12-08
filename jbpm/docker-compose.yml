@@ -1,0 +1,58 @@
+version: '3.1'
+
+services:
+  bpm-server:
+    #image: jboss/jbpm-server-full:7.59.0.Final
+    build: ./
+    environment:
+      JBPM_DB_DRIVER: postgres
+      JBPM_DB_HOST: db
+      JBPM_DB_PORT: 5432
+      JBPM_DB_NAME: jbpm
+      JBPM_DB_USER: postgres
+      JBPM_DB_PASSWORD: pass
+    ports:
+      - 8080:8080
+      - 8001:8001
+    volumes:
+      - jbpm-git:/opt/jboss/wildfly/bin/.niogit:Z
+    depends_on:
+      - db
+
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: pass
+      PGDATA: /tmp
+    ports:
+      - 5432:5432
+    volumes:
+      - db-data:/tmp
+      - .\init-sql:/docker-entrypoint-initdb.d
+
+  db-ui:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "admin@root.ip"
+      PGADMIN_DEFAULT_PASSWORD: "pass"
+    ports:
+      - 5433:80
+    volumes:
+      - db-ui-data:/var/lib/pgadmin
+
+volumes:
+  jbpm-git:
+  db-data:
+  db-ui-data:
+
+# http://localhost:8080/business-central
+# wbadmin     wbadmin     admin,analyst,user,process-admin,kie-server
+# krisv       krisv       admin,analyst,user,process-admin,kie-server
+# john        john        analyst,Accounting,PM,kie-server
+# sales-rep   sales-rep   analyst,sales,kie-server
+# katy        katy        analyst,HR,kie-server
+# jack        jack        analyst,IT,kie-server
+# docker run -p 8080:8080 -p 8001:8001 -v ./git-repo:/opt/jboss/wildfly/bin/.niogit:Z -d --name jbpm-server-full jboss/jbpm-server-full:latest
+
+# API doc:http://localhost:8080/kie-server/docs/

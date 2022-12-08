@@ -1,0 +1,16 @@
+version: '3.1'
+
+services:
+  logstash:
+    build: ./
+    volumes:
+      - ./config/logstash.yml:/usr/share/logstash/config/logstash.yml
+      - ./pipeline:/usr/share/logstash/pipeline
+    environment:
+      ES_HOST: '192.168.1.71'
+      LS_JAVA_OPTS: '-Xmx512m -Xms512m'
+      DEVOPS_OPTS: ''
+      DEBUG: "true"
+      LOG_LEVEL: "info"
+    ports:
+      - 4561:4560

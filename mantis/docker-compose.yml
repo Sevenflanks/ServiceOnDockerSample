@@ -1,0 +1,33 @@
+version: "3"
+
+services:
+  web:
+    # image: swjeng/mantisbt:2.25.5
+    image: xlrl/mantisbt:2.25.4
+    container_name: mantis_web
+    ports:
+      - "18080:80"
+    volumes:
+      - ./config:/var/www/html/config
+      - ./custom:/var/www/html/custom
+    restart: always
+
+  mysql:
+    image: mysql:8.0.31
+    container_name: mantis_db
+    ports:
+      - "13306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=mantis
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=mysql_pass
+    volumes:
+      - ./mysql:/var/lib/mysql
+    restart: always
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - "18081:8080"

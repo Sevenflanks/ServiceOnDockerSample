@@ -1,0 +1,33 @@
+/target/
+/log/
+/data/
+!.mvn/wrapper/maven-wrapper.jar
+.war
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+/build/
+/.gradle/
+_sample_from_chinalife_1/.gradle/
+_sample_from_chinalife_2/.gradle/
+_sample_from_chinalife_1/build/
+*.war

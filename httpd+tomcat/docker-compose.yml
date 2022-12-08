@@ -1,0 +1,21 @@
+version: '3.1'
+
+services:
+  httpd:
+    build:
+      context: ./
+      dockerfile: Dockerfile-httpd
+    ports:
+      - 80:80
+    volumes:
+      - ./log/apache2:/var/log/apache2
+
+  tomcat:
+    build:
+      context: ./
+      dockerfile: Dockerfile-tomcat
+    ports:
+      - 8080:8080
+      - 8099:9999
+    volumes:
+      - ./log/tomcat:/usr/local/tomcat/logs
